@@ -64,7 +64,7 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 
 		driver.findElement(By.xpath("//label[text()='Confirm Password']/parent::div/following-sibling::div/input")).sendKeys("TestUser@123456");
 		
-		
+		driver.findElement(By.id("save")).click();
 		
 
 	}
