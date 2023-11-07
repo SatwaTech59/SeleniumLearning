@@ -1,15 +1,22 @@
 package basics;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.google.common.io.Files;
+
 public class OrangeHRMAutomation  extends ReUsableMethods{
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		
 		launchApplication("chrome", "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 		
@@ -64,7 +71,12 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 
 		driver.findElement(By.xpath("//label[text()='Confirm Password']/parent::div/following-sibling::div/input")).sendKeys("TestUser@123456");
 		
-		driver.findElement(By.id("save")).click();
+	
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File img =    ts.getScreenshotAs(OutputType.FILE); 
+		Files.move(img, new File ("/Users/sudhananda/59/59Selenium/empCreation.png"));
+		
+		
 		
 
 	}
