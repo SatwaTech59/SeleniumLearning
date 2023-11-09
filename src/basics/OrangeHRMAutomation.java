@@ -71,14 +71,20 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 
 		driver.findElement(By.xpath("//label[text()='Confirm Password']/parent::div/following-sibling::div/input")).sendKeys("TestUser@123456");
 		
-	
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File img =    ts.getScreenshotAs(OutputType.FILE); 
-		Files.move(img, new File ("/Users/sudhananda/59/59Selenium/empCreation.png"));
+	takeScreenshot();
+		
+		
+		driver.quit();
 		
 		
 		
 
+	}
+	
+	public static void takeScreenshot() throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File img =    ts.getScreenshotAs(OutputType.FILE); 
+		Files.move(img, new File ("/Users/sudhananda/59/59Selenium/empCreation.png"));
 	}
 	
 	public static void login(String userName, String passWord) {
