@@ -11,6 +11,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.google.common.io.Files;
 
@@ -58,7 +59,7 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 		}
 		
 		Thread.sleep(3000);
-		empIdField.sendKeys("75212");
+		empIdField.sendKeys("75211");
 		
 		WebElement loginDetails = driver.findElement(By.xpath("//span[starts-with(@class,'oxd-switch-input')]/preceding-sibling::input"));
 		
@@ -66,12 +67,28 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 		js.executeScript("arguments[0].click();", loginDetails);
 		
 		
-		driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input")).sendKeys("TestUser123");
+		driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input")).sendKeys("TestUser1234");
 		driver.findElement(By.xpath("//label[text()='Password']/parent::div/following-sibling::div/input")).sendKeys("TestUser@123456");
 
 		driver.findElement(By.xpath("//label[text()='Confirm Password']/parent::div/following-sibling::div/input")).sendKeys("TestUser@123456");
 		
-	takeScreenshot();
+		takeScreenshot();
+		
+		Thread.sleep(5000);
+		
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		
+		
+		if (driver.findElements(By.xpath("//h6[text()='Personal Details']")).size() == 0) {
+			System.out.println("Employee is not created.");
+		} else {
+			System.out.println("Employee has been created successfully.");
+		}
+		
+	   WebElement nationalityElem = 	driver.findElement(By.xpath("//label[text()='Nationality']/../following-sibling::div/div/div"));
+		
+		Select listBox = new Select(nationalityElem);
+		listBox.selectByIndex(2);
 		
 		
 		driver.quit();
