@@ -1,0 +1,189 @@
+<html>
+
+    <head>
+        <script>
+            function editValue(id, fieldId){
+                setTimeout(() => {
+                    if (document.getElementById(id).getAttribute('value').includes('Edit')){
+                        document.getElementById(fieldId).disabled = false;
+                        document.getElementById(id).setAttribute('value','Disable Field');
+                        document.getElementById(id).setAttribute('class','abcbutton');
+                    } else{
+                        document.getElementById(fieldId).disabled = true;
+                        document.getElementById(id).setAttribute('value','Edit');
+                        document.getElementById(id).setAttribute('class','xyzbutton');
+                    }
+                    
+                    
+                },"30000" )
+               
+            }
+
+            function calculate(operation){
+                setTimeout(() => {
+                   var val1Value =  document.getElementById("val1").value;
+                   var val2Value = document.getElementById("val2").value;
+
+           
+                   var isNumber = true;
+                   if (!val1Value.match("[0-9]{1,}") ) {
+                    alert("Please enter a valid number in Value 1.");
+                    isNumber = false;
+                   }
+                        
+                    
+                   if (!val2Value.match("[0-9]{1,}")){
+                        alert("Please enter a valid number in Value 2.");
+                        isNumber = false;
+                   }
+
+                   var strResult = "";
+                   var result = 0;
+                 
+                        switch (operation){
+                            case "add":
+                             result = parseInt(val1Value) + parseInt(val2Value);
+                            strResult = Number.toString(result);
+                            break;
+                            case "substract":
+                             result = parseInt(val1Value) - parseInt(val2Value);
+                            strResult = Number.toString(result);
+                            break;
+                            case "division":
+                                 result = parseInt(val1Value) / parseInt(val2Value);
+                            strResult = Number.toString(result);
+                            break;
+                            case "multiply":
+                                 result = parseInt(val1Value) * parseInt(val2Value);
+                                strResult = Number.toString(result);
+                            break;
+                        }
+                    
+                        document.getElementById("res").value = result;
+    
+                },"3000" )
+               
+            }
+
+            function editValue1(){
+                setTimeout(() => {
+                    document.getElementById("userInput1").disabled = false;
+                },"2000" )
+               
+            }
+
+            function clearValue(){
+                setTimeout(() => {
+                    var toclear = confirm("Are you sure, you want to clear?");
+
+                    if (toclear){
+                        document.getElementById("res").value = "";
+                    }
+
+                },"2000" )
+               
+            }
+
+            function hideOrDisplayElem(){
+                setTimeout(() => {
+
+                    if (document.getElementById("btnHide").value == "DISPLAY"){
+                        document.getElementById("hideordisplay").setAttribute("style","display:block;");
+                        document.getElementById("btnHide").value = "HIDE";
+                    }else{
+                        document.getElementById("hideordisplay").setAttribute("style","display:None;");
+                        document.getElementById("btnHide").value = "DISPLAY";
+                    }
+                    
+
+                },"2000" )
+               
+            }
+        </script>
+
+
+<style>
+    body {background-color: powderblue;}
+    h1   {color: blue;}
+    p    {color: red;}
+    
+    .xyzbutton {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        height:1cm;
+    }
+
+    .abcbutton {
+        background-color: #f12707; /* Red */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        height:1cm;
+    }
+    </style>
+        
+
+        <title>Examples for explicit wait</title>
+
+
+    </head>
+
+    <body>
+        <div>
+            <span> A: </span> &nbsp &nbsp
+            <input id="userInput" disabled> </input> &nbsp &nbsp &nbsp 
+            <input id="editInput"  type="button" onclick="editValue(this.id,'userInput')" class="xyzbutton" value="Edit"> </input>
+            <br><br>
+            <span> B: </span> &nbsp &nbsp
+            <input id="userInput1" disabled> </input> &nbsp &nbsp &nbsp 
+            <input id="editInput1" type="button" onclick="editValue(this.id,'userInput1')" class="xyzbutton" value="Edit"> </input>
+           
+
+        </div>
+        <br><br>
+
+        <div>
+            
+            <span>Value 1: </span> &nbsp &nbsp
+            <input id="val1" > </input>
+            <br> <br>
+            <span>Value 2: </span> &nbsp &nbsp
+            <input id="val2" > </input>
+
+            <br> <br>
+
+            <span>Result : </span> &nbsp &nbsp
+            <input id="res" disabled> </input>
+
+
+            <br> <br>
+
+            <button id="add" onclick="calculate('add')">ADD</button> &nbsp &nbsp <button id="sub">SUB</button> 
+            &nbsp &nbsp <button id="multi">MULTIPLY</button> &nbsp &nbsp <button id="division">DIVIDE</button> 
+            
+            &nbsp &nbsp <button id="clear" onclick="clearValue()">CLEAR</button>
+
+            <br><br>
+
+            <input type="button" class="xyzbutton" value="DISPLAY" id="btnHide" onclick="hideOrDisplayElem()"></input>
+            <input id="hideordisplay" type="text" style="display: none;"></input>
+
+        </div>
+
+
+
+
+    </body>
+
+
+</html>

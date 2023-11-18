@@ -10,7 +10,11 @@ public class FaceBookLogin {
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://facebook.com");
 		
-		driver.quit();
+		String handleId =   driver.getWindowHandle();
+		
+		System.out.println(handleId);
+		
+		//driver.quit();
 
 	}
 

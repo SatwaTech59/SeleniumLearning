@@ -2,6 +2,7 @@ package basics;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -35,6 +36,43 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 		clickElement(By.xpath("//span[text()='PIM']"));
 		clickElement(By.linkText("Add Employee"));
 
+		
+		addEmployee();
+		Thread.sleep(5000);
+	 WebElement nationalityElem=	driver.findElement(By.xpath("//label[text()='Nationality']/../following-sibling::div"));
+	 	nationalityElem.click();
+	 	
+	 	Thread.sleep(2000);
+	 	String valToSelect = "Indian";
+	 	List<WebElement> allOptions =   driver.findElements(By.xpath("//div[@role='listbox']//span"));
+	 
+	    System.out.println(allOptions.size());
+	    
+	    for (WebElement elem: allOptions) {
+	    	String elemText = elem.getText();
+	    	if (elemText.equalsIgnoreCase(valToSelect)) {
+	    		elem.click();
+	    		break;
+	    	}
+	    }
+	 
+	 /*JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", nationalityElem);
+		Thread.sleep(5000);
+		js.executeScript("arguments[0].click();", nationalityElem);
+		*/
+		
+	
+		Thread.sleep(5000);
+		driver.quit();
+		
+		
+		
+
+	}
+
+	public static void addEmployee() throws InterruptedException, IOException {
+
 		enterValueIntoField(By.name("firstName"), "Test");
 		enterValueIntoField(By.name("lastName"), "Emp");
 		WebElement empIdField = driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input"));
@@ -48,7 +86,7 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 		Thread.sleep(3000);
 		
 		empIdField.clear();
-		
+		/*
 		while (!empid.isEmpty()) {
 			Thread.sleep(1000);
 			Actions act = new Actions(driver);
@@ -59,21 +97,23 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 		}
 		
 		Thread.sleep(3000);
-		empIdField.sendKeys("75211");
-		
-		WebElement loginDetails = driver.findElement(By.xpath("//span[starts-with(@class,'oxd-switch-input')]/preceding-sibling::input"));
+		empIdField.sendKeys("75212");
+		*/
+	/*	WebElement loginDetails = driver.findElement(By.xpath("//span[starts-with(@class,'oxd-switch-input')]/preceding-sibling::input"));
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", loginDetails);
 		
 		
-		driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input")).sendKeys("TestUser1234");
+		driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input")).sendKeys("TestUser1236");
 		driver.findElement(By.xpath("//label[text()='Password']/parent::div/following-sibling::div/input")).sendKeys("TestUser@123456");
 
 		driver.findElement(By.xpath("//label[text()='Confirm Password']/parent::div/following-sibling::div/input")).sendKeys("TestUser@123456");
+	
+			takeScreenshot();
 		
-		takeScreenshot();
 		
+		*/
 		Thread.sleep(5000);
 		
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
@@ -84,24 +124,26 @@ public class OrangeHRMAutomation  extends ReUsableMethods{
 		} else {
 			System.out.println("Employee has been created successfully.");
 		}
+	}
+	
+	public static void updateProfile(){
+		try {
+			takeScreenshot();
+		} catch (IOException e) {
+			
+		}
+	
 		
-	   WebElement nationalityElem = 	driver.findElement(By.xpath("//label[text()='Nationality']/../following-sibling::div/div/div"));
 		
-		Select listBox = new Select(nationalityElem);
-		listBox.selectByIndex(2);
-		
-		
-		driver.quit();
-		
-		
-		
-
 	}
 	
 	public static void takeScreenshot() throws IOException {
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File img =    ts.getScreenshotAs(OutputType.FILE); 
-		Files.move(img, new File ("/Users/sudhananda/59/59Selenium/empCreation.png"));
+		
+			TakesScreenshot ts = (TakesScreenshot) driver;
+			File img =    ts.getScreenshotAs(OutputType.FILE); 
+			Files.move(img, new File ("/Users/sudhananda/59/59Selenium/empCreation.png"));
+		
+		
 	}
 	
 	public static void login(String userName, String passWord) {
