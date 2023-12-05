@@ -26,11 +26,13 @@ public class WorkingExplicitWaits {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		
 		
-	
+		
 		String val1 = "40";
 		String val2 = "50";
 		
 		int total =    Integer.parseInt(val1) + Integer.parseInt(val2);
+		
+		WebElement elem = driver.findElement(By.id("val1"));
 		
 		
 		driver.findElement(By.id("val1")).sendKeys(val1);

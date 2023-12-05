@@ -6,9 +6,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class ActiveElement {
+public class ActiveElement extends Thread {
+	
+	public void run() {
+		
+		try {
+			testMethod();
+		} catch (Exception e) {
+		
+		}
+	}
+	
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void testMethod() throws InterruptedException {
 		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -30,7 +40,10 @@ public class ActiveElement {
 	    
 	    Thread.sleep(4000);
 	    
+		Thread.sleep(4000);
+	    
 	    driver.navigate().refresh();
+	    driver.quit();
 
 	}
 
